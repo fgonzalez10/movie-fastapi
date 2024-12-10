@@ -3,6 +3,8 @@ from fastapi.responses import HTMLResponse
 from bd.database import engine, Base
 from routers.movie import routerMovie
 from routers.user import login_user
+import uvicorn
+import os
 
 
 
@@ -28,3 +30,8 @@ Base.metadata.create_all(bind=engine)
 def read_root():
     return HTMLResponse('<h2>Hola Mundo! </h2>')
 
+
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
